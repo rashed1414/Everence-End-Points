@@ -5,10 +5,8 @@
 
 package com.sp.conferenceendpoint.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "attendees")
 public class Attendee {
@@ -31,6 +29,11 @@ public class Attendee {
     private String company;
     private String email;
     private String phone_number;
+
+    @OneToMany(mappedBy = "attendee")
+    private List<AttendeeTicket> attendee_tickets;
+
+
 
     public Attendee(){
 
@@ -91,4 +94,13 @@ public class Attendee {
     public void setPhone_number(String phone_number) {
         this.phone_number = phone_number;
     }
+
+    public List<AttendeeTicket> getAttendee_tickets() {
+        return attendee_tickets;
+    }
+
+    public void setAttendee_tickets(List<AttendeeTicket> attendee_tickets) {
+        this.attendee_tickets = attendee_tickets;
+    }
+
 }

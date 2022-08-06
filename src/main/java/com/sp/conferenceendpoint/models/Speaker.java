@@ -38,6 +38,9 @@ public class Speaker {
     @ManyToMany(mappedBy = "speakers")
     private List<Session> sessions;
 
+    @ManyToMany(mappedBy = "speakers")
+    private List<Workshop> workshops;
+
     public Speaker(){
 
     }
@@ -104,5 +107,13 @@ public class Speaker {
 
     public void setSessions(List<Session> sessions) {
         this.sessions = sessions;
+    }
+
+    public List<Workshop> getWorkshops() {
+        return workshops;
+    }
+
+    public void setWorkshops(List<Workshop> workshops) {
+        this.workshops = workshops;
     }
 }

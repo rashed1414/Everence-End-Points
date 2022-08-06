@@ -27,6 +27,9 @@ public class DiscountCode {
     private String discount_type;
     private Integer discount_amount;
 
+    @OneToOne(mappedBy = "discount_code")
+    private AttendeeTicket attendee_ticket;
+
     public DiscountCode(){
 
     }
@@ -69,5 +72,13 @@ public class DiscountCode {
 
     public void setDiscount_amount(Integer discount_amount) {
         this.discount_amount = discount_amount;
+    }
+
+    public AttendeeTicket getAttendee_ticket() {
+        return attendee_ticket;
+    }
+
+    public void setAttendee_ticket(AttendeeTicket attendee_ticket) {
+        this.attendee_ticket = attendee_ticket;
     }
 }

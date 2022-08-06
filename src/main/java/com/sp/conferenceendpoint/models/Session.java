@@ -25,6 +25,10 @@ public class Session {
     private String Session_description;
     private Integer session_length;
 
+    @OneToOne(mappedBy = "session")
+    private SessionSchedule session_schedule;
+
+
     @ManyToMany
     @JoinTable(
             name="session_speakers",
@@ -33,6 +37,11 @@ public class Session {
     )
     private List<Speaker> speakers;
 
+    @ManyToMany
+    @JoinTable(name="session_tags",
+                joinColumns=@JoinColumn(name = "session_id"),
+                inverseJoinColumns=@JoinColumn(name="tag_id"))
+    private List<Tag> tags;
 
 
     public Session(){
@@ -77,5 +86,21 @@ public class Session {
 
     public void setSpeakers(List<Speaker> speakers) {
         this.speakers = speakers;
+    }
+
+    public SessionSchedule getSession_schedule() {
+        return session_schedule;
+    }
+
+    public void setSession_schedule(SessionSchedule session_schedule) {
+        this.session_schedule = session_schedule;
+    }
+
+    public List<Tag> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
     }
 }
