@@ -8,7 +8,7 @@ import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
 
-@Entity(name="time_slot")
+@Entity(name="time_slots")
 public class TimeSlot {
 
      /*
@@ -31,8 +31,9 @@ public class TimeSlot {
     private Time end_time;
     private Boolean is_keynote_time_slot;
 
-    @OneToOne(mappedBy = "time_slot")
-    private SessionSchedule session;
+    @ManyToOne
+    @JoinColumn(name="schedule_id")
+    private SessionSchedule schedule;
     public TimeSlot(){
 
     }
@@ -77,11 +78,13 @@ public class TimeSlot {
         this.is_keynote_time_slot = is_keynote_time_slot;
     }
 
-    public SessionSchedule getSession() {
-        return session;
+    public SessionSchedule getSchedule() {
+        return schedule;
     }
 
-    public void setSession(SessionSchedule session) {
-        this.session = session;
+    public void setSchedule(SessionSchedule session) {
+        this.schedule = session;
     }
+
+
 }

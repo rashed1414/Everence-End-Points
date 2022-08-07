@@ -4,10 +4,14 @@
 */
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name="sessions")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Session {
     /*
        Class Name: Session
@@ -25,8 +29,18 @@ public class Session {
     private String Session_description;
     private Integer session_length;
 
+
     @OneToOne(mappedBy = "session")
+    @JsonIgnore
     private SessionSchedule session_schedule;
+
+
+    @ManyToMany
+    @JoinTable(name="session_tags",
+                joinColumns=@JoinColumn(name = "session_id"),
+                inverseJoinColumns=@JoinColumn(name="tag_id"))
+    private List<Tag> tags;
+
 
 
     @ManyToMany
@@ -37,11 +51,6 @@ public class Session {
     )
     private List<Speaker> speakers;
 
-    @ManyToMany
-    @JoinTable(name="session_tags",
-                joinColumns=@JoinColumn(name = "session_id"),
-                inverseJoinColumns=@JoinColumn(name="tag_id"))
-    private List<Tag> tags;
 
 
     public Session(){

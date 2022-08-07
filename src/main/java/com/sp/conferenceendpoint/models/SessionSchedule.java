@@ -5,6 +5,7 @@
 package com.sp.conferenceendpoint.models;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "session_schedule")
 public class SessionSchedule {
@@ -27,9 +28,9 @@ public class SessionSchedule {
     @JoinColumn(name = "session_id")
     private Session session;
 
-    @OneToOne
-    @JoinColumn(name="time_slot_id")
-    private TimeSlot time_slot;
+
+    @OneToMany(mappedBy = "schedule")
+    private List<TimeSlot> timeSlot;
 
     private String room;
 
@@ -45,21 +46,8 @@ public class SessionSchedule {
         this.schedule_id = schedule_id;
     }
 
-    public Session getSession() {
-        return session;
-    }
 
-    public void setSession(Session session) {
-        this.session = session;
-    }
 
-    public TimeSlot getTime_slot() {
-        return time_slot;
-    }
-
-    public void setTime_slot(TimeSlot time_slot) {
-        this.time_slot = time_slot;
-    }
 
     public String getRoom() {
         return room;
@@ -67,5 +55,21 @@ public class SessionSchedule {
 
     public void setRoom(String room) {
         this.room = room;
+    }
+
+    public List<TimeSlot> getTimeSlot() {
+        return timeSlot;
+    }
+
+    public void setTimeSlot(List<TimeSlot> timeSlot) {
+        this.timeSlot = timeSlot;
+    }
+
+    public Session getSession() {
+        return session;
+    }
+
+    public void setSession(Session session) {
+        this.session = session;
     }
 }

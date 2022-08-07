@@ -4,6 +4,8 @@
  */
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -24,7 +26,10 @@ public class Tag {
     private String description;
 
     @ManyToMany(mappedBy = "tags")
+    @JsonIgnore
     private List<Session> sessions;
+
+
     public Tag(){
 
     }
