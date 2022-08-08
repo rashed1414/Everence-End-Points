@@ -17,7 +17,7 @@ Check out the [API Documentation]("")
 *************************************************
 
 
-**Contains the following endpoints:
+# Contains the following endpoints:
 
 # Session:
     POST:
