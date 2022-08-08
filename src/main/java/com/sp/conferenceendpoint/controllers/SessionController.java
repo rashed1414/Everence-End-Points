@@ -6,7 +6,6 @@ import com.sp.conferenceendpoint.models.Tag;
 import com.sp.conferenceendpoint.repositories.SessionRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,9 +36,8 @@ public class SessionController {
         return sessionRepository.findAll();
     }
 
-    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @Operation(summary = "Get Session ById",responses = {
             @ApiResponse(responseCode = "200", description = "Successful Response"
                     ,content = @Content(mediaType = "application/json")),
@@ -50,9 +48,8 @@ public class SessionController {
         return sessionRepository.findById(id).get();
     }
 
-    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping("/{id}/speakers")
+    @RequestMapping(value = "/{id}/speakers", method = RequestMethod.GET)
     @Operation(summary = "Get Session Speakers",responses = {
             @ApiResponse(responseCode = "200", description = "Successful Response"
                     ,content = @Content(mediaType = "application/json")),
@@ -63,9 +60,8 @@ public class SessionController {
         return sessionRepository.findById(id).get().getSpeakers();
     }
 
-    @GetMapping
     @ResponseStatus(HttpStatus.OK)
-    @RequestMapping("/{id}/tags")
+    @RequestMapping(value = "/{id}/tags", method = RequestMethod.GET)
     @Operation(summary = "Get Session Tags",responses = {
             @ApiResponse(responseCode = "200", description = "Successful Response"
                     ,content = @Content(mediaType = "application/json")),
@@ -101,7 +97,7 @@ public class SessionController {
     }
 
 
-    @PutMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Update Session",responses = {
             @ApiResponse(responseCode = "200", description = "Successful Response"
@@ -122,7 +118,7 @@ public class SessionController {
         }else return ResponseEntity.ok("insert all session data");
     }
 
-    @PatchMapping("/{id}")
+    @RequestMapping(value = "/{id}", method = RequestMethod.PATCH)
     @ResponseStatus(HttpStatus.OK)
     @Operation(summary = "Patch Session",responses = {
             @ApiResponse(responseCode = "200", description = "Successful Response"
@@ -132,31 +128,37 @@ public class SessionController {
     )
     public ResponseEntity<String> patch(@PathVariable Long id, @RequestBody Session session){
         Session existingSession = sessionRepository.findById(id).get();
-        if (session.getTags()!=null) {
-            existingSession.setTags(session.getTags());
-            return ResponseEntity.ok("resource saved");
-        }
-        if (session.getSpeakers()!=null) {
-            existingSession.setSpeakers(session.getSpeakers());
-            return ResponseEntity.ok("resource saved");
-        }
-        if (session.getSession_name()!=null) {
-            existingSession.setSession_name(session.getSession_name());
-            return ResponseEntity.ok("resource saved");
-        }
-        if (session.getSession_description()!=null) {
-            existingSession.setSession_description(session.getSession_description());
-            return ResponseEntity.ok("resource saved");
-        }
-        if (session.getSession_length()!=null) {
-            existingSession.setSession_length(session.getSession_length());
-            return ResponseEntity.ok("resource saved");
-        }
-        if (session.getSession_schedule()!=null) {
-            existingSession.setSession_schedule(session.getSession_schedule());
-            return ResponseEntity.ok("resource saved");
-        }
-        return ResponseEntity.ok("no data to update");
+            if (session.getTags() != null) {
+                existingSession.setTags(session.getTags());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("tags updated");
+            }
+            if (session.getSpeakers() != null) {
+                existingSession.setSpeakers(session.getSpeakers());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("speakers updated");
+            }
+            if (session.getSession_name() != null) {
+                existingSession.setSession_name(session.getSession_name());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("session name updated");
+            }
+            if (session.getSession_description() != null) {
+                existingSession.setSession_description(session.getSession_description());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("session description updated");
+            }
+            if (session.getSession_length() != null) {
+                existingSession.setSession_length(session.getSession_length());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("session length updated");
+            }
+            if (session.getSession_schedule() != null) {
+                existingSession.setSession_schedule(session.getSession_schedule());
+                sessionRepository.saveAndFlush(existingSession);
+                ResponseEntity.ok("session schedule updated");
+            }
+            return ResponseEntity.ok("data Patched");
     }
 
 }
