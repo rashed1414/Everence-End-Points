@@ -1,6 +1,7 @@
-# Everance-End-Points
+# Everence-End-Points
 *************************************************
-## => Everance-End-Points is a RESTful API for Everance.<==
+## => Everence-End-Points is a RESTful API for Everance.
+### Everence is a platform for creating and booking events and sessions.
 *************************************************
 Check out the [API Documentation]("")
 *************************************************

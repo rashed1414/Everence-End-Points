@@ -130,35 +130,30 @@ public class SessionController {
         Session existingSession = sessionRepository.findById(id).get();
             if (session.getTags() != null) {
                 existingSession.setTags(session.getTags());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("tags updated");
             }
             if (session.getSpeakers() != null) {
                 existingSession.setSpeakers(session.getSpeakers());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("speakers updated");
             }
             if (session.getSession_name() != null) {
                 existingSession.setSession_name(session.getSession_name());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("session name updated");
             }
             if (session.getSession_description() != null) {
                 existingSession.setSession_description(session.getSession_description());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("session description updated");
             }
             if (session.getSession_length() != null) {
                 existingSession.setSession_length(session.getSession_length());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("session length updated");
             }
             if (session.getSession_schedule() != null) {
                 existingSession.setSession_schedule(session.getSession_schedule());
-                sessionRepository.saveAndFlush(existingSession);
                 ResponseEntity.ok("session schedule updated");
             }
-            return ResponseEntity.ok("data Patched");
+        sessionRepository.saveAndFlush(existingSession);
+        return ResponseEntity.ok("data Patched");
     }
 
 }
