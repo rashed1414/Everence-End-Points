@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/sessions")
-@io.swagger.v3.oas.annotations.tags.Tag(name = "SessionsAPIs")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "SessionAPIs")
 public class SessionController {
 
     @Autowired

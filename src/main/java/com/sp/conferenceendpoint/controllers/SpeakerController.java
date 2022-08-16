@@ -17,6 +17,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/speakers")
+@io.swagger.v3.oas.annotations.tags.Tag(name = "SpeakerAPIs")
 public class SpeakerController {
 
     @Autowired
@@ -86,7 +87,7 @@ public class SpeakerController {
     @ResponseStatus(HttpStatus.OK)
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     @Operation(summary = "Delete Speaker",responses = {
-            @ApiResponse(responseCode = "200", description = "Successful Response"
+            @ApiResponse(responseCode = "202", description = "Successful Response"
                     ,content = @Content(mediaType = "application/json")),
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
             @ApiResponse(responseCode = "400", description = "Speaker Not Found")}
