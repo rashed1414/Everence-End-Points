@@ -3,7 +3,7 @@
 ## => Everence-End-Points is a RESTful API for Everance.
 ### Everence is a platform for creating and booking events and sessions.
 *************************************************
-Check out the [API Documentation]("")
+Check out the [API Documentation]("https://everence.herokuapp.com/swagger-ui/index.html#/")
 *************************************************
 # DB Schema: 
 ### Contain all kind of relations between tables.
