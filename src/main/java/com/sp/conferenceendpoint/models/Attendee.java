@@ -5,6 +5,8 @@
 
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class Attendee {
     private String phone_number;
 
     @OneToMany(mappedBy = "attendee")
+    @JsonIgnore
     private List<AttendeeTicket> attendee_tickets;
 
 

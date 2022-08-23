@@ -11,9 +11,9 @@ public class SessionType {
     @Id
     private Integer session_type_id;
     private String type;
-
+/*
     @OneToMany(mappedBy = "session_type")
     private List<Session> sessions;
-
+*/
     public SessionType(){}
 }

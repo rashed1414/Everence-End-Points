@@ -50,12 +50,12 @@ public class Session {
             inverseJoinColumns = @JoinColumn(name="speaker_id")
     )
     private List<Speaker> speakers;
-
+/*
     @ManyToOne
     @JoinColumn(name = "session_type_id")
     private SessionType session_type;
 
-
+*/
 
     public Session(){
 

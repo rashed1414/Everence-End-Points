@@ -5,6 +5,8 @@
 
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -37,6 +39,7 @@ public class AttendeeTicket {
     private DiscountCode discount_code;
 
     @ManyToMany(mappedBy = "attendee_tickets")
+    @JsonIgnore
     private List<Workshop> workshops;
 
     private Integer net_price;
