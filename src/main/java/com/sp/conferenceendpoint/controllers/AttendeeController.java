@@ -3,6 +3,7 @@ package com.sp.conferenceendpoint.controllers;
 import com.sp.conferenceendpoint.models.Attendee;
 import com.sp.conferenceendpoint.models.AttendeeTicket;
 import com.sp.conferenceendpoint.repositories.AttendeeRepository;
+import com.sp.conferenceendpoint.services.AttendeeServicesImp;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -23,6 +24,7 @@ public class AttendeeController {
 
     @Autowired
     private AttendeeRepository attendeeRepository;
+    private AttendeeServicesImp attendeeServices;
 
     @RequestMapping(method = RequestMethod.GET)
     @ResponseStatus(HttpStatus.OK)
@@ -154,6 +156,38 @@ public class AttendeeController {
             return ResponseEntity.ok("Updated Successfully" + existingAttendee);
         }
     }
+    @RequestMapping(value="/{id}/AttendeeSessions",method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get Attendee Sessions",responses = {
+            @ApiResponse(responseCode = "200", description = "Successful Response"
+                    ,content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "400", description = "USer Not Found")}
+    )
+    public ResponseEntity<?> getAttendeeSessions(@PathVariable Long id){
+        if(attendeeRepository.existsById(id)) {
+            return ResponseEntity.ok(attendeeServices.getAttendeeSessions(id));
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
+    @RequestMapping(value="/{id}/AttendeeWorkshops",method = RequestMethod.GET)
+    @ResponseStatus(HttpStatus.OK)
+    @Operation(summary = "Get Attendee Workshops",responses = {
+            @ApiResponse(responseCode = "200", description = "Successful Response"
+                    ,content = @Content(mediaType = "application/json")),
+            @ApiResponse(responseCode = "500", description = "Internal Server Error"),
+            @ApiResponse(responseCode = "400", description = "USer Not Found")}
+    )
+    public ResponseEntity<?> getAttendeeWorkshops(@PathVariable Long id){
+        if(attendeeRepository.existsById(id)) {
+            return ResponseEntity.ok(attendeeServices.getAttendeeWorkshops(id));
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
 
 
