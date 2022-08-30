@@ -5,7 +5,7 @@ import com.sp.conferenceendpoint.models.Workshop;
 
 import java.util.List;
 
-public interface AttendeeService {
+public interface AttendeeTicketsService {
     public List<Session> getAttendeeSessions(Long id);
     public List<Workshop> getAttendeeWorkshops(Long id);
 

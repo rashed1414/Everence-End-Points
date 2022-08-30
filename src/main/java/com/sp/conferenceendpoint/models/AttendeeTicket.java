@@ -8,6 +8,7 @@ package com.sp.conferenceendpoint.models;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity(name = "attendee_tickets")
@@ -27,21 +28,25 @@ public class AttendeeTicket {
 
     @ManyToOne
     @JoinColumn(name = "attendee_id")
+    @NotNull
     private Attendee attendee;
 
     @OneToOne
     @JoinColumn(name = "ticket_price_id")
+    @NotNull
     private TicketPrice ticket_price;
 
 
     @OneToOne
     @JoinColumn(name = "discount_code_id")
+    @NotNull
     private DiscountCode discount_code;
 
     @ManyToMany(mappedBy = "attendee_tickets")
     @JsonIgnore
-    private List<Workshop> workshops;
-
+    @NotNull
+    private List<Workshop> workshops ;
+    @NotNull
     private Integer net_price;
 
 

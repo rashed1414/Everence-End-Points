@@ -1,18 +1,16 @@
 package com.sp.conferenceendpoint.services;
 
-import com.sp.conferenceendpoint.interfaces.AttendeeService;
+import com.sp.conferenceendpoint.interfaces.AttendeeTicketsService;
 import com.sp.conferenceendpoint.models.AttendeeTicket;
 import com.sp.conferenceendpoint.models.Session;
 import com.sp.conferenceendpoint.models.Speaker;
 import com.sp.conferenceendpoint.models.Workshop;
 import com.sp.conferenceendpoint.repositories.AttendeeRepository;
-import com.sp.conferenceendpoint.repositories.SessionRepository;
-import com.sp.conferenceendpoint.repositories.WorkshopRepository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendeeServicesImp implements AttendeeService {
+public class AttendeeTicketsTicketsServicesImp implements AttendeeTicketsService {
     private AttendeeRepository attendeeRepository;
 
 
