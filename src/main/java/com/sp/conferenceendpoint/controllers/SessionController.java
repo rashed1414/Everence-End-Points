@@ -2,7 +2,7 @@ package com.sp.conferenceendpoint.controllers;
 
 import com.sp.conferenceendpoint.models.Session;
 import com.sp.conferenceendpoint.models.Speaker;
-import com.sp.conferenceendpoint.models.Tag;
+import com.sp.conferenceendpoint.models.SessionTag;
 import com.sp.conferenceendpoint.repositories.SessionRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -68,7 +68,7 @@ public class SessionController {
             @ApiResponse(responseCode = "500", description = "Internal Server Error"),
             @ApiResponse(responseCode = "409", description = "Tags Not Found")}
     )
-    public List<Tag> getTags(@PathVariable Long id){
+    public List<SessionTag> getTags(@PathVariable Long id){
         return sessionRepository.findById(id).get().getTags();
     }
 

@@ -10,7 +10,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "tags")
-public class Tag {
+public class SessionTag {
     /*
       Class Name: SessionSchedule
       Description: Model Class to modeling the "sessions" table
@@ -25,12 +25,12 @@ public class Tag {
 
     private String description;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "sessionTags")
     @JsonIgnore
     private List<Session> sessions;
 
 
-    public Tag(){
+    public SessionTag(){
 
     }
 

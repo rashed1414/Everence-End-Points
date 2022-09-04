@@ -39,7 +39,7 @@ public class Session {
     @JoinTable(name="session_tags",
                 joinColumns=@JoinColumn(name = "session_id"),
                 inverseJoinColumns=@JoinColumn(name="tag_id"))
-    private List<Tag> tags;
+    private List<SessionTag> sessionTags;
 
 
 
@@ -50,12 +50,26 @@ public class Session {
             inverseJoinColumns = @JoinColumn(name="speaker_id")
     )
     private List<Speaker> speakers;
-/*
+
     @ManyToOne
     @JoinColumn(name = "session_type_id")
     private SessionType session_type;
 
-*/
+    public List<SessionTag> getSessionTags() {
+        return sessionTags;
+    }
+
+    public void setSessionTags(List<SessionTag> sessionTags) {
+        this.sessionTags = sessionTags;
+    }
+
+    public SessionType getSession_type() {
+        return session_type;
+    }
+
+    public void setSession_type(SessionType session_type) {
+        this.session_type = session_type;
+    }
 
     public Session(){
 
@@ -109,11 +123,11 @@ public class Session {
         this.session_schedule = session_schedule;
     }
 
-    public List<Tag> getTags() {
-        return tags;
+    public List<SessionTag> getTags() {
+        return sessionTags;
     }
 
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
+    public void setTags(List<SessionTag> sessionTags) {
+        this.sessionTags = sessionTags;
     }
 }

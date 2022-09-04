@@ -5,6 +5,8 @@
 
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -23,12 +25,13 @@ public class PricingCategorey {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String pricing_category_code;
+    private Character pricing_category_code;
 
     private String pricing_category_name;
     private Date pricing_start_date;
     private Date pricing_end_date;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "pricing_category")
     private List<TicketPrice> prices;
 
@@ -36,16 +39,18 @@ public class PricingCategorey {
 
     }
 
-    public String getPricing_category_code() {
-        return pricing_category_code;
-    }
 
-    public void setPricing_category_code(String pricing_category_code) {
-        this.pricing_category_code = pricing_category_code;
-    }
 
     public String getPricing_category_name() {
         return pricing_category_name;
+    }
+
+    public Character getPricing_category_code() {
+        return pricing_category_code;
+    }
+
+    public void setPricing_category_code(Character pricing_category_code) {
+        this.pricing_category_code = pricing_category_code;
     }
 
     public void setPricing_category_name(String pricing_category_name) {

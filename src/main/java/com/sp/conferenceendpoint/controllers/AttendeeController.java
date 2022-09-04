@@ -88,7 +88,7 @@ public class AttendeeController {
         return attendeeRepository.saveAndFlush(attendee);
     }
 
-    @RequestMapping(value="/{id}",method = RequestMethod.PUT)
+    @RequestMapping(value="/{id}/",method = RequestMethod.PUT)
     @ResponseStatus(HttpStatus.ACCEPTED)
     @Operation(summary = "Update Attendee",responses = {
             @ApiResponse(responseCode = "202", description = "Successful Response"
@@ -106,7 +106,7 @@ public class AttendeeController {
                  attendee.getTitle()!=null && attendee.getPhone_number()!=null){
             Attendee existingAttendee = attendeeRepository.findById(id).get();
 
-            BeanUtils.copyProperties(attendee, existingAttendee, "id");
+            BeanUtils.copyProperties(attendee, existingAttendee, "attendee_id");
             attendeeRepository.saveAndFlush(existingAttendee);
 
             return ResponseEntity.ok("Updated Successfully" + existingAttendee);

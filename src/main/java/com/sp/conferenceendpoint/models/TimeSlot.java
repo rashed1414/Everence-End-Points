@@ -4,6 +4,8 @@
  */
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.Date;
@@ -31,8 +33,8 @@ public class TimeSlot {
     private Time end_time;
     private Boolean is_keynote_time_slot;
 
-    @ManyToOne
-    @JoinColumn(name="schedule_id")
+    @OneToOne(mappedBy="timeSlot")
+    @JsonIgnore
     private SessionSchedule schedule;
     public TimeSlot(){
 

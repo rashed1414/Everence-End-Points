@@ -24,7 +24,7 @@ public class AttendeeTicket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long attendee_tickets_id;
+    private Long attendee_ticket_id;
 
     @ManyToOne
     @JoinColumn(name = "attendee_id")
@@ -37,14 +37,13 @@ public class AttendeeTicket {
     private TicketPrice ticket_price;
 
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "discount_code_id")
     @NotNull
     private DiscountCode discount_code;
 
-    @ManyToMany(mappedBy = "attendee_tickets")
     @JsonIgnore
-    @NotNull
+    @ManyToMany(mappedBy = "attendee_tickets")
     private List<Workshop> workshops ;
     @NotNull
     private Integer net_price;
@@ -63,12 +62,12 @@ public class AttendeeTicket {
         this.discount_code = discount_code;
     }
 
-    public Long getAttendee_tickets_id() {
-        return attendee_tickets_id;
+    public Long getAttendee_ticket_id() {
+        return attendee_ticket_id;
     }
 
-    public void setAttendee_tickets_id(Long attendee_tickets_id) {
-        this.attendee_tickets_id = attendee_tickets_id;
+    public void setAttendee_ticket_id(Long attendee_ticket_id) {
+        this.attendee_ticket_id = attendee_ticket_id;
     }
 
     public Attendee getAttendee() {

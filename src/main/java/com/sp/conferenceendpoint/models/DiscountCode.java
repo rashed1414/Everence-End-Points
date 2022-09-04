@@ -5,7 +5,10 @@
 
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.List;
 
 @Entity(name="discount_codes")
 public class DiscountCode {
@@ -25,10 +28,11 @@ public class DiscountCode {
     private String discount_code;
     private String discount_name;
     private String discount_type;
-    private Integer discount_amount;
+    private Double discount_amount;
 
-    @OneToOne(mappedBy = "discount_code")
-    private AttendeeTicket attendee_ticket;
+    @JsonIgnore
+    @OneToMany(mappedBy = "discount_code")
+    private List<AttendeeTicket> attendee_ticket;
 
     public DiscountCode(){
 
@@ -66,19 +70,19 @@ public class DiscountCode {
         this.discount_type = discount_type;
     }
 
-    public Integer getDiscount_amount() {
+    public Double getDiscount_amount() {
         return discount_amount;
     }
 
-    public void setDiscount_amount(Integer discount_amount) {
+    public void setDiscount_amount(Double discount_amount) {
         this.discount_amount = discount_amount;
     }
 
-    public AttendeeTicket getAttendee_ticket() {
+    public List<AttendeeTicket> getAttendee_ticket() {
         return attendee_ticket;
     }
 
-    public void setAttendee_ticket(AttendeeTicket attendee_ticket) {
+    public void setAttendee_ticket(List<AttendeeTicket> attendee_ticket) {
         this.attendee_ticket = attendee_ticket;
     }
 }

@@ -5,56 +5,42 @@ import com.sp.conferenceendpoint.models.AttendeeTicket;
 import com.sp.conferenceendpoint.models.Session;
 import com.sp.conferenceendpoint.models.Speaker;
 import com.sp.conferenceendpoint.models.Workshop;
-import com.sp.conferenceendpoint.repositories.AttendeeRepository;
+import com.sp.conferenceendpoint.repositories.AttendeeTicketRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class AttendeeTicketsTicketsServicesImp implements AttendeeTicketsService {
-    private AttendeeRepository attendeeRepository;
-
+    private AttendeeTicketRepository attendeeTicketRepository;
 
     @Override
     public List<Session> getAttendeeSessions(Long id) {
-        List<AttendeeTicket> attendeeTicketList=attendeeRepository.findById(id).get().getAttendee_tickets();
-        List<List<Workshop>> workshops=new ArrayList<List<Workshop>>();
-        List<List<Speaker>> speakers=new ArrayList<List<Speaker>>();
-        List<List<Session>> sessions=new ArrayList<List<Session>>();
-        List<Session> result=new ArrayList<Session>();
+        List<Workshop> workshops = new ArrayList<>();
+        List<Session> sessions = new ArrayList<>();
+        if(attendeeTicketRepository.existsById(id)){
+            AttendeeTicket attendeeTicket = attendeeTicketRepository.findById(id).get();
+            workshops = attendeeTicket.getWorkshops();
+            for(Workshop workshop : workshops){
+                List<Speaker> speakers = workshop.getSpeakers();
+                for(Speaker speaker : speakers){
+                    List<List<Session>> sessionsList = Collections.singletonList(speaker.getSessions());
+                    for(List<Session> sessionList : sessionsList){
+                        sessions.addAll(sessionList);
+                    }
 
-
-        for(AttendeeTicket attendeeTicket:attendeeTicketList){
-            workshops.add(attendeeTicket.getWorkshops());
-        }
-        for(List<Workshop> workshopList:workshops){
-            for(Workshop workshop:workshopList){
-                speakers.add(workshop.getSpeakers());
+                }
             }
         }
-        for(List<Speaker> speakerList:speakers){
-            for(Speaker speaker:speakerList){
-                sessions.add(speaker.getSessions());
-            }
-        }
-        for(List<Session> sessionList:sessions){
-            result.addAll(sessionList);
-        }
-
-        return result;
+        return sessions;
     }
 
     @Override
     public List<Workshop> getAttendeeWorkshops(Long id) {
-        List<AttendeeTicket> attendeeTicketList=attendeeRepository.findById(id).get().getAttendee_tickets();
-        List<List<Workshop>> workshops=new ArrayList<List<Workshop>>();
-        List<Workshop> result=new ArrayList<Workshop>();
-        for(AttendeeTicket attendeeTicket:attendeeTicketList){
-            workshops.add(attendeeTicket.getWorkshops());
-        }
-        for(List<Workshop> workshopList:workshops){
-            result.addAll(workshopList);
-        }
-        return result;
+        if (attendeeTicketRepository.existsById(id)) {
+            AttendeeTicket attendeeTicket = attendeeTicketRepository.findById(id).get();
+            return attendeeTicket.getWorkshops();
+        }else return null;
     }
 
 }

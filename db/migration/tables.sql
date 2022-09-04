@@ -76,7 +76,7 @@ CREATE TABLE session_schedule
     room         varchar(30) NOT NULL
 );
 
-CREATE TABLE tags
+CREATE TABLE sessionTags
 (
     tag_id      SERIAL PRIMARY KEY,
     description varchar(30) NOT NULL
@@ -85,7 +85,7 @@ CREATE TABLE tags
 CREATE TABLE session_tags
 (
     session_id integer NOT NULL REFERENCES sessions (session_id),
-    tag_id     integer NOT NULL REFERENCES tags (tag_id)
+    tag_id     integer NOT NULL REFERENCES sessionTags (tag_id)
 );
 
 CREATE TABLE speakers

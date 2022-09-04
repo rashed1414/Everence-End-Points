@@ -4,10 +4,12 @@
  */
 package com.sp.conferenceendpoint.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
-@Entity(name = "workshop")
+@Entity(name = "workshops")
 public class Workshop {
 
     /*
@@ -38,10 +40,11 @@ public class Workshop {
             inverseJoinColumns = @JoinColumn(name = "speaker_id"))
     private List<Speaker> speakers;
 
+
     @ManyToMany
-    @JoinTable(name = "workshop_registratins",
+    @JoinTable(name = "workshop_registrations",
             joinColumns = @JoinColumn(name = "workshop_id"),
-            inverseJoinColumns = @JoinColumn(name = "attendee_ticket__id"))
+            inverseJoinColumns = @JoinColumn(name = "attendee_ticket_id"))
     private List<AttendeeTicket> attendee_tickets;
 
     public Workshop(){
